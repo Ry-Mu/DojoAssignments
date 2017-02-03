@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WeatherApp</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('form').submit(function() {
+
+      // your code here (build up your url)
+      var searchcity= $('input').val();
+      $.get("http://api.openweathermap.org/data/2.5/weather?q="+searchcity+",us&appid=7185cbd69a6124be91d8b5a965fa992d", function(res) {
+      console.log(res);
+      $('.api').html("<h1>"+res.name+"</h1><h3>Temperature: "+res.main.temp+"</h3>")
+          // your code here
+      }, 'json');
+      // don't forget to return false so the page doesn't refresh
+      return false;
+    });
+    });
+
+    </script>
+    <style>
+
+    body input{
+      width: 200px;
+    }
+    button {
+      border-radius: 10px;
+    }
+
+    .api {
+      width: 60%;
+      height: 600px;
+      border: 2px solid red
+    }
+    </style>
+  </head>
+  <body>
+    <form>
+      <div class="searchbar">
+      <input type="search" name="search" value ="search"/>
+      <input type="submit" name="Search weather"/>
+      </div>
+      <div class="api">
+
+      </div>
+    </form>
+  </body>
+</html>
