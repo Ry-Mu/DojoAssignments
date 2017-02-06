@@ -1,0 +1,47 @@
+#wrapper {
+  background-color: beige;
+  position: relative;
+  width: 1238px;
+  padding: 15px;
+  margin: auto;
+}
+
+img{
+  height: 200px;
+  width: 200px;
+}
+
+header{
+  postion: relative;
+  left: 240px;
+  /*display: inline-block;*/
+}
+
+table {
+  position: relative;
+  left: 7px;
+}
+
+header img, header h1 {
+	display: inline-block;
+	padding: 15px;
+	position: relative;
+	left: 20px;
+	top: 20px;
+}
+header h1 {
+	font-size: 36px;
+  text-align: center;
+}
+
+td {
+  border: 5px; solid black;
+  padding: 15px;
+}
+
+.red{
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
