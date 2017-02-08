@@ -1,0 +1,37 @@
+<html>
+    <head>
+       <title>Form Test Index</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dojostyles.css') }}">
+    </head>
+    <body>
+      <h1>Dojo Survey</h1>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <form action='/users' method='post'>
+          Name: <input type='text' name='name'>
+
+
+      </form>
+      <form action="action_page.php">
+          <h4>Dojo Location:</h4>
+          <select name="Dojo Location">
+            <option value="San Jose">San Jose</option>
+            <option value="Seattle">Seattle</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Berkely">Berkely</option>
+          </select>
+          <br><br>
+    </form>
+    <h4>Favorite Language:</h4>
+    <form action="action_page.php">
+        <select name="Favorite Language">
+          <option value="Python">Python</option>
+          <option value="HTML">HTML</option>
+          <option value="css">css</option>
+          <option value="Javascript">Javascript</option>
+        </select>
+        <br><br>
+        <textarea rows="4" cols="50" name="comment" form="usrform">Enter comments here...</textarea>
+      <button type="button">Submit</button>
+  </form>
+    </body>
+</html>
