@@ -1,0 +1,25 @@
+.container {
+	margin-top: 10%;
+}
+.row {
+	margin-bottom: 5%;
+}
+.high, .low, .win {
+	height: 350px;
+	width: 350px;
+	text-align: center;
+	padding: 5px;
+}
+
+.high *, .low *, .win * {
+	margin-top: 25px;
+}
+.high {
+	box-shadow: inset 0 0 30px red;
+}
+.low {
+	box-shadow: inset 0 0 30px yellow;
+}
+.win {
+	box-shadow: inset 0 0 30px blue;
+}
