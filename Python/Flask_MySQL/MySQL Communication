@@ -1,0 +1,4 @@
+You are all familiar with writing queries. You should be proud! Writing queries is the hard part.
+Displaying the information to the page is fairly easy.
+You will still be writing queries the exact same way that you already have been, but we will be adding a few additional steps so
+that we can communicate with the database through PHP or Python.
