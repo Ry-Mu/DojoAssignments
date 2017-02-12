@@ -1,0 +1,182 @@
+Lists
+
+A list, also known as an array in other programming languages, is a data type that allows you to hold groups of values.
+Think of a list like a dresser with multiple drawers in which each drawer stores some information.
+Lists are created with values inside of square brackets [], where each value is separated by a comma.
+After a list is created, it can still be updated by adding values and/or by deleting values.
+An empty list is simply [ ].
+
+              ninjas = ['Rozen', 'KB', 'Oliver']
+              my_list = ['4', ['list', 'in', 'a', 'list'], 987]
+              empty_list = []
+
+In Python, the elements of a list do not have to be of the same data type.
+A list can be a mixture of any Python data types, including, tuples, strings, numeric, and even a list itself (a list within a list).
+
+Accessing Values
+
+Back to the dresser analogy, imagine that each drawer is numbered starting with 0.
+Say the first drawer( index of 0) has 'documents' inside, the second drawer (index 1) has 'envelopes' inside, and so on.
+Each drawer holds a number, also known as the index (which serves as the unique address that points to each of our items inside the drawer). You can access the items in the drawer like below:
+            drawer = ['documents', 'envelopes', 'pens']
+            #access the drawer with index of 0 and print value
+            print drawer[0]  #prints documents
+            #access the drawer with index of 1 and print value
+            print drawer[1] #prints envelopes
+            #access the drawer with index of 2 and print value
+            print drawer[2] #prints pens
+
+Manipulating Lists
+
+Here are some methods that we will use to manipulate lists
+
+<list>.append(<new_element>)
+
+Appends a new item onto the end of the given list. You can pass any data type into this function.
+            x = [1,2,3,4,5]
+            x.append(99)
+            print x
+            #the output would be [1,2,3,4,5,99]
+
+<list>.insert(<index>, <new_element>)
+Inserts a new item into the list at the given index. You can pass any data type into this function.
+            x = [1,2,3,4,5]
+            x.insert(2,99)
+            print x
+            #the output would be [1,2,99,3,4,5]
+
+<list>.remove(<element>)
+Remove the first item from the list whose value is provided. Errors if the element does not exist
+            x = [1,2,3,4,5]
+            x.remove(3)
+            print x
+            #the output would be [1,2,4,5]
+
+<list>.pop(<optional_index>)
+Remove the item at a given position; if the position is not given, it will remove the last entry from the list
+
+            x = [1,2,3,4,5]
+            x.pop()
+            print x
+            #the output would be [1,2,3,4]
+            y = [10,11,12,13,14]
+            y.pop(1)
+            print y
+            #the output would be [10,12,13,14]
+
+<list>.sort()
+Sorts the elements in a list in ascending order by numerical value, or alphabetically in the case of strings. Try sorting an array with mixed data types. What causes this behavior?
+
+            x = [99,4,2,5,-3];
+            x.sort()
+            print x
+            #the output would be [-3,2,4,5,99];
+
+Slice
+Uses [ ] characters to return a copy of the list, constrained to the specified indices. The starting index and ending index should be separated by the ":" character.
+
+          x = [99,4,2,5,-3];
+          print x[:]
+          #the output would be [99,4,2,5,-3]
+          print x[1:]
+          #the output would be [4,2,5,-3];
+          print x[:4]
+          #the output would be [99,4,2,5]
+          print x[2:4]
+          #the output would be [2,5];
+
+List Built-in Functions
+
+Below are some built-in functions that deal with lists. The following functions can also be applied to all sequences, including tuples and strings. What do we mean when we say sequence? Think of a sequence as anything over which we can iterate.
+
+len() - Returns the number of items in a sequence.
+          my_list = [1, 'Zen', 'hi']
+          print len(my_list)
+          # the output would be 3
+
+max() - Returns the largest item in the sequence.
+          my_list = [1, 7, 3]
+          print max(my_list)
+          # the output would be 7
+
+min() - Returns the smallest item in the sequence. When comparing boolean to numbers, True == 1 and False == 0. Comparing items of differing types are quite uncommon, but if you ever do this, note that all numbers < all dictionaries < all lists < all strings < all tuples.   Again ask yourself what causes this behavior. How would you go about finding out?
+          my_list = [1, 7, 3]
+          print min(my_list)
+          # the output would be 1
+
+any() - Returns True if there exists any item in the sequence which is True.
+        my_list = [0, 'hi', '']
+        print any(my_list)
+        # the output would be True since a string would equate to true in this case
+        my_list = [0, '']
+        print any(my_list)
+        # the output would be False since 0 (zero) and an empty string will both be false
+
+all() - Returns True if all items in the sequence are True.
+        my_list = [0, 'Zen', '']
+        print all(my_list)
+        # the output would be False
+        my_list = [4, 'hi']
+        print all(my_list)
+        # the output would be True
+
+These are just some of the things you can do to manipulate or extract information from a list.
+The result of the sample above would be:
+s
+t
+r
+
+The continue statement returns the control to the beginning of the loop. The continue statement rejects -- or skips -- all the remaining statements in the current iteration of the loop, and continues normal execution at the top of the loop. The continue statement is very useful when you want to skip one or more loop iterations, but keep looping to the end.
+        for val in "string":
+          if val == "i":
+            continue
+          print(val)
+
+In this case, the result should be:
+s
+t
+r
+n
+g
+
+Pass
+The pass statement is used when a statement is required syntactically but you do not want any command or code to execute.
+          class EmptyClass:
+            pass
+
+          for val in my_string:
+          pass
+The pass statement is a null operation; nothing happens when it executes. The pass is almost never seen in final production, but can be useful in places where your code has not been completed yet.
+
+Else
+There are certain conditions that we give for every loop that we have, but what if the condition was not met and we still would like to do something if that happens? We can then use else. Yes, that is right, else in a loop.
+        x = 3
+        y = x
+        while y > 0:
+          print y
+          y = y - 1
+        else:
+          print "Final else statement
+
+The output would be:
+3
+2
+1
+Final else statement
+
+Note that this else code section is only executed if the while loop runs normally and its conditional is false (whether we never entered the while loop, or we did but eventually the conditional changed from true to false). If instead our while loop is exited prematurely because of a break or return statement, then the else code section will never be executed.
+
+          x = 3
+          y = x
+          while y > 0:
+            print y
+            y = y - 1
+            if y == 0:
+              break
+          else:
+           print "Final else statement"
+
+Because of the break, the above code will output the following:
+3
+2
+1

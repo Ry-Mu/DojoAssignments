@@ -1,0 +1,93 @@
+Strings
+
+Strings are any sequence of characters (letters, numerals, ~($/}\#, etc.) enclosed in single or double quotes.
+You can display a string like this:
+
+          print "this is a sample string"
+
+
+Printing Strings using Variables
+
+There are multiple ways that you can print a string containing data from variables.
+
+The first is by adding a comma after the string, followed by the variable. Note that the comma is outside the closing quotation mark of the string. Print inserts a space between elements separated by a comma
+
+            name = "Zen"
+            print "My name is", name
+
+The second is by concatenating the contents into a new string, with the help of +.
+
+            name = "Zen"
+            print "My name is " + name
+
+There is one other difference between concatenating using a plus and using a comma, can you find out what it is?
+
+Hint: try concatenating a string with an integer using each method.
+
+Lastly, you can use curly brackets - {} - and the string .format() method to
+inject variables into your string - this is known as string interpolation.
+
+            first_name = "Zen"
+            last_name = "Coder"
+            print "My name is {} {}".format(first_name, last_name)
+
+Above the string "Zen" is inserted where the first curly bracket is and the string "last_name" where the second curly bracket is. There should be a corresponding number of curly brackets and arguments passed to the .format() function
+
+As you read other people's code, you may see a different method of string interpolation. It is a lesser-used and soon-to-be deprecated method that you should know about, but will not need to use.
+
+              hw = "hello %s" % 'world'
+              print hw
+              # the output would be:
+              # hello world
+There are several variations and tricks with each method, which have changed according to the Python version you are using. The developers of Python have yet to decide on how best to implement string interpolation for Python. Exciting stuff. Stay tuned. Python 3.6 is set to implement a new string interpolation method.
+
+Built-In String Methods
+
+Below you'll find a few of the most useful Python built-in methods for string manipulation. It's important to know that there are built-in methods for every data type, and to have a general idea of what they can do. Try experimenting with them in the shell to see what they can do. Don't spend time trying to memorize them, though. You can always look up whatever you need to use.
+
+<string>.capitalize() - Create a copy of the string with only its first character capitalized.
+
+                  my_string = 'hello world'
+                  print my_string.capitalize()
+                  # the output would be:
+                  # Hello world
+
+<string>.lower() -  Return a copy of string converted to all-lowercase.
+                  my_string = 'Hello WORLD'
+                  print my_string.lower()
+                  # the output would be:
+                  # hello world
+
+<string>.swapcase() - Return a copy of a string with uppercase characters converted to lowercase, and vice versa.
+
+                  my_string = 'Hello WORLD'
+                  print my_string.swapcase()
+                  # the output would be:
+                  # hELLO world
+
+<string>.upper() - Return a copy of a string converted to all uppercase.
+
+                  my_string = 'hello world'
+                  print my_string.upper()
+                  # the output would be:
+                  # HELLO WORLD
+
+<string>.find(<substring>) - Determine if a specified string (in this example, 'el') occurs in a given string and returns the index or location of where the substring ('el') occurred from the string. If not found, it will return -1 as a result.
+
+                  my_string = "hello world"
+                  print my_string.find("el")
+                  # the output would be:
+                  # 1
+
+<string>.replace(<old>, <new> [, max]) - This method returns a copy of the string with all occurrences of substring old replaced by new. If the optional argument max is given, only the first number of times indicated in max will you have the substring old replaced.
+
+                  my_string = "hello world"
+                  print my_string.replace("world", "kitty")
+                  # the output would be:
+                  # hello kitty
+
+                  my_string = "egg, egg, Spam, egg and Spam"
+                  print my_string.replace("egg", "Spam", 2)
+                  # the output would be:
+                  # Spam, Spam, Spam, egg and Spam
+                  # notice that only the first 2 "egg" matches were replaced in the string.

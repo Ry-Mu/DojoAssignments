@@ -1,0 +1,55 @@
+Loops
+
+Imagine that you are in 1st grade and you got in trouble in class for talking too much (it happened to me a lot of times).
+Your teacher asks you to write "I will not talk in class" 1,000 times. Yikes!
+If you had learned to program in kindergarten, you might have thought to write a program that uses a loop to do it for you!
+
+In Python, like many other programming languages, loops are the way of executing a set of code repeatedly for a certain amount of iterations or until we've reached a specific condition. This is because computers are great at doing things over and over again. This could be used for something as simple as a math program that counts from 1 to 1,000,000 or iterating through the items within a list! In this section, we will be talking about the for and while loops in Python. In essence, anything you can do with one loop type, you can do with the other, but let's see how they are different.
+
+For Loop
+
+We use the for loop when we know how many times we have to repeat our code. You will mostly be using for loops in your programs, particularly in Python. A for loop looks like this:
+
+          for count in range(0,5):
+            print "looping -", count
+
+          with an output like this:
+          looping - 0
+          looping - 1
+          looping - 2
+          looping - 3
+          looping - 4
+
+Python's for statement iterates over the items of any sequence(list or string), in the order they appear in the sequence. In the above example, we iterated through the range from 0 to 5 (exclusive) and printed out a 'looping - ' item in the sequence. Notice how we use count as a counter/variable to refer to the current item in our loop.
+
+More generally, here's the basic syntax of a for loop
+          for <counter> in <sequence or range>:
+            # do something
+
+While Loops
+
+While loops are often used when we don't know how many times we have to repeat a block of code but we know we have to do it until a certain condition is met.
+
+Remember this for loop?
+
+        for count in range(0,5):
+          print "looping -", count
+
+We can rewrite it as a while loop:
+        count = 0
+        while count < 5; #notice the colon!
+          print 'looping -', count
+          count += 1
+
+The basic syntax for a while loop looks like this:
+        while <expression>:
+          # do something
+
+
+The break statement exits the current loop prematurely, resuming execution at the first post-loop statement, just like the traditional break found in C or JavaScript.
+
+The most common use for the break is when some external condition is triggered, requiring a hasty exit from a loop. The break statement can be used in both while and for loop. When loops are nested, a break will only exit from the innermost loop.
+        for val in "string":
+          if val == "i":
+            break
+          print(val)

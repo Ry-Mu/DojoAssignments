@@ -1,0 +1,57 @@
+The Python Shell
+
+After installation we checked to make sure that Python was properly installed by activating the Python shell.
+We did this by typing python in our bash terminal or command prompt. But what is the Python shell?
+The shell is a command line interface we can use to interact with the Python interpreter.
+Once activated, we can type some Python code and see the results immediately. Let's try experimenting with the Python shell.
+
+Math
+
+You can use the Python shell to do some math. Give it a try!
+
+            >>>4 + 5
+            >>>18 - 5
+            >>>4 * 7
+            >>>31/2
+The last operation produced a result you probably didn't expect. Most programming languages treat integers (whole numbers) and floating point numbers, or floats (decimal numbers) differently. If you divide an integer by an integer, the result will always be an integer rounded down.
+
+Now, try the following:
+          >>>9.0/4
+          >>>9.0/4.0
+If either number is a float, the result of the division is a float!
+
+
+Variables
+
+Variables are very common throughout every programming language. You'll remember variables from algebra class.
+
+Here are some basic examples:
+
+            a = 20
+            b = 100 - a
+            a + b = 10
+
+You'll remember that we can store many types of information in variables.
+A variable is simply a container for a value. That particular value can vary, hence the name variable.
+
+Creating variables
+
+Creating a variable in python is very easy! You don't have to use the var keyword like you've been doing in JavaScript! Try creating these variables in you Python shell:
+
+          >>>my_string = "This is a string stored in the my_string variable"
+          >>>my_num = 5
+          >>>my_string = "I can change my value whenever I like"
+          >>>my_list = [4,2,9,7]
+
+The final value you may recognize as an array. An array in Python is called a list, but is like the arrays you've been using in JavaScript. Now, let's look at what each variable contains:
+
+          >>>my_string
+          "I can change my value whenever I like"
+          >>>my_num
+          5
+          >>>my_list
+          [4,2,9,7]
+
+You'll see the values printed on the lines below your commands. Later on, you will learn about other types of information, called data types, that can be stored in variables. Using this knowledge you'll be able to do different operations with variables depending on their type - looping, mathematic operations, printing, and more!
+
+To exit the shell, type: exit()

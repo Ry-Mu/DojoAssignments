@@ -1,0 +1,44 @@
+Conditional Expressions
+
+Conditional statements or expressions in Python can be done using if (and else) just like in other programming languages.
+We use these conditional statements with logic operators to control the flow of our programs.
+
+            # if statement:
+            if <condition>:
+              # do something
+            # if-else statement:
+            elif <condition>:
+              # do something
+            else:
+              # do this instead
+
+Say, for example, you were driving home and there was some construction on the road in front of you.
+You notice a detour sign and decide to take that way back instead. Although it was practically a subconscious decision, this illustrates how we use control flow and conditionals in everyday life to determine what we would do based on certain conditions.
+
+Our if-else statement would look like this:
+            If there is construction
+            {
+                 use detour
+            }
+            else
+            {
+                 take the normal route
+            }
+
+Here's another example but now written out in python code:
+            age = 15
+            if age >= 18:
+              print 'Legal age'
+            else:
+              print 'You are so young!'
+
+The if and if-else statements in Python are straightforward and are very much like the if statements in other languages.
+The only difference with Python's if statement is, when you have another condition, you write it using elif.
+
+            if age >= 18:
+              print 'Legal age'
+            elif age == 17:
+              print 'One more year and you will be of legal age'
+            else:
+              print 'You are so young!'
+Elif is just like else if or elsif from other languages.
