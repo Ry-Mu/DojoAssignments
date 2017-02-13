@@ -1,0 +1,63 @@
+Methods
+
+For any blueprint, we're going to need to describe whatever it is we are making a blueprint for.
+One way we could describe the object/thing is by defining what it can do. Enter methods.
+          def my_function(self):
+             print "This is a message inside the class."
+Methods are simply functions contained inside a class that we use to describe what each instance of your class can do. You can declare methods in the same way you declare a stand-alone function by also passing the self keyword as a parameter (we'll explain this soon).
+            class Human(object):
+            def taunt(self):     # note how we have a single parameter, 'self'
+            print "You want a piece of me?"
+
+Once we've created our class, we can then create a new instance of our class and then invoke our method
+            michael = Human()
+            michael.taunt()       # when we invoke the function, notice how we didn't pass a parameter
+
+'self' in Methods
+
+As you saw earlier, we defined our taunt function with one parameter but did not pass an argument when we invoked the function. This is because the creators of Python chose to implement methods in such a way that makes the instance to which the method belongs be passed automatically when you invoke the method, but not received automatically at method declaration. The first parameter of all methods is the instance that the method is being called on. However, you don't need to pass this as an argument when you invoke the method. Also, we chose the word self to name our parameter but this is just the recommended convention -- you could use whatever you want there but it's best to stick with self.
+
+Magic Methods
+
+Creating your own objects in Python inevitably means implementing one or more of Python's protocol methods -- the magic methods whose names start and end with double underscores. These protocols are roughly the equivalent of interfaces in Python.
+
+Here are some of the commonly-used magic methods:
+
+__init__()
+
+In order to guarantee that all of the instance variables (to be covered in the next tab) exist during the entire life of the object, it is best to initialize them by providing a method with the special name of  __init__(). The __init__() method is always called automatically by Python when the object is created; we can exploit this to assure a correct initialization.
+
+For example, we have a Point class which defines a method distance to calculate the distance from the origin.
+          class Point(object):
+              def __init__(self,x = 0,y = 0):
+                  print "Created a new point!"
+                  self.x = x
+                  self.y = y
+              def distance(self):
+                  #Find distance from origin
+                  return (self.x**2 + self.y**2) ** 0.5
+
+In the above example, __init__() defines three parameters but we will only pass two (x and y) when we create a new Point instance. In the __init__() method, self refers to the newly created object; in other class methods, it refers to the instance whose method was called. As you can see nested in the __init__(), two variables are initialized, we'll explain that more in detail in the next tab when we explain attributes.
+
+Going back to our Human class, we can get our __init__() function started:
+              class Human(object):
+              def __init__(self):
+              print "New Human!!!"     #when we create a new human, we'll get this as an output
+              def taunt(self):
+              print "You want a piece of me?"
+
+Now, whenever you create a new instance of the Human class, the __init__() function will be executed. In this case, we had the __init__() function print a message whenever we create a new human. In the next section, we'll use the __init__() function to initialize attributes for our instances.
+
+__init__()  vs  __new__()?
+
+One important distinction to mention is the difference between the __init__() method and constructor functions. Constructors are methods which create new object instances, therefore,  __init__() is not a constructor. The __init__() method is called immediately after the object is created and then initializes the defined variables inside our newly created object. The constructor in Python is __new__()
+
+You will see __init__() very often, but the use of __new__() is rare. This is because most of the time you don't need to override it. Generally, __init__() is used to initialize a newly created object while __new__() is used to control the way an object is created. One practical use of __new__(), for example, is to restrict the number of objects created from a class. We could also use __new__() to initialize attributes of an object, but logically it should be inside __init__().
+
+When we create an instance of our human class, the __new__() method will be used to create an instance of our class. This will be run under-the-hood. Then the __init__() function will be run.
+
+__unicode__
+
+This method defines your behavior when __unicode__() is called on an instance of your class. __unicode__() is like str(), but it returns a Unicode string. Be wary: if a client calls str() on an instance of your class and you've only defined __unicode__(), it won't work. You should always try to define __str__() as well in case someone doesn't have the luxury of using Unicode.
+
+You may check other magic methods through this link: Python Magic Methods
