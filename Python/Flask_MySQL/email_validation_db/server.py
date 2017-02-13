@@ -1,21 +1,34 @@
-from flask import Flask, request, redirect, render_template, session, flash
-from mysqlconnection import MySQLConnector
+from flask import Flask, render_template, redirect, request, flash
+import re
+from MySQLConnection import MySQLConnector
 app = Flask(__name__)
-mysql = MySQLConnector(app,'friendsdb')
+app.secret_key = "bootsandpants"
+mysql = MySQLConnector
 @app.route('/')
 def index():
-    friends = mysql.query_db("SELECT * FROM friends")
-    print friends
-    return render_template('index.html')
+    return render_template('index_html')
 
-@app.route('/update_friend/<friend_id>', methods=['POST'])
-def update(friend_id):
-    query = "UPDATE friends  SET first_name = :first_name, last_name = :last_name, occupation = :occupation  WHERE id = :id"
-    data = {
-             'first_name': request.form['first_name'],
-             'last_name':  request.form['last_name'],
-             'occupation': request.form['occupation'],
-             'id': friend_id
-           }
-    mysql.query_db(query, data)
+@app.route('/process', methods=['POST'])
+def process():
+    emailRegex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+    if email_regex.match(request.form['email']):
+        print "this is a valid email!"
+        query = "INSERT INTO emails (email, created_at,updated_at) VALUES (:email, NOW(), NOW();"
+        data = {"email":request.form['email']}
+        mynewid = mysql.query_db(query,data)
+        print "I just inserted this!", mynewid
+        flash("this is a valid email! Your email {} is valid!".format(request.form['email']))
+        return redirect('/success')
+    else:
+        print "this is not a valid email"
+        flash("This is not a valid email!")
     return redirect('/')
+
+@app.route('/success')
+def success():
+    query = "SELECT * FROM emails"
+    listofemails = mysql.query_db(query)
+    return render_template('success.html', emails = listofemails)
+
+
+app.run(debug=True)

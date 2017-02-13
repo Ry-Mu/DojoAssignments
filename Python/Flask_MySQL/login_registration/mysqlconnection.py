@@ -6,7 +6,7 @@ class MySQLConnection(object):
     def __init__(self, app, db):
         config = {
                 'host': 'localhost',
-                'database': db, # we got db as an argument
+                'database': 'login_registration', # we got db as an argument
                 'user': 'root',
                 'password': 'root',
                 'port': '8889' # change the port to match the port your SQL server is running on

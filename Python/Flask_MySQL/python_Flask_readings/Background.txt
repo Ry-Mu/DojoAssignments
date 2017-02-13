@@ -1,0 +1,105 @@
+Background
+
+Up to this point, we haven't really discussed the need to secure our data.
+Internet hackers are notorious for trying to guess passwords and generally just make a mess of things.
+As web developers, we are responsible for keeping our users' data safe.
+That means storing the data safely as well. Storing passwords as-is is never a good way to keep data secure.
+Imagine if a user's password was stored as-is on a database somewhere and a hacker got a hold of it. Now imagine if all of your users' passwords were stored as-is in a database. Can you say bedlam?
+
+This is why we encrypt users' passwords before we put them into our database.
+By encrypting, we mean to mask the value of an input by using an algorithm that changes its value. Encryption and cryptography are a complicated and fascinating field of study that is heavily mathematical in nature.
+That being said, you don't need a Ph.D. to protect your data; you just need to know a few handy tools!
+This tab will show you basic md5 encryption, take it to the next level by generating a salt, and finally using the powerful bcrypt engine to encrypt passwords.
+
+Basic md5 encryption
+
+The basic way to encrypt something is to use md5 encryption.
+Md5 encryption is a technique that takes an input (most likely a password) and returns an encrypted string.
+To see how this works, type the following into a sublime document:
+        import md5 # imports the md5 module to generate a hash
+        password = 'password';
+        # encrypt the password we provided as 32 character string
+        encrypted_password = md5.new(password).hexdigest();
+        print encrypted_password; #this will show you the encrypted value
+        # 5f4dcc3b5aa765d61d8327deb882cf99 -> nice!
+
+What you will see is the crazy string above. The md5 function returns an encrypted version of the parameter it is passed.
+The md5 function yields the same value every time it is run with the same argument.
+That means the value it spits back is not random -- it is encrypted.
+ You may ask: why don't hackers just reverse engineer the values? Answer: the md5 algorithm is well known and solvable but it is very strong in the sense that it is not easily reverse engineered. Md5 is not the industry standard but it is a good starting point.
+
+ How to use md5
+
+ When you add your users to the database upon registration, you should save their passwords as an encrypted md5 string.
+ Similarly, when they log in, you should encrypt the inputted password to make sure it matches with the one saved in the database. Here's the idea:
+
+ The user being put into your database:
+
+           import md5 # do this at the top of your file where you import modules
+           @app.route('/users/create', methods=['POST'])
+           def create_user():
+            username = request.form['username']
+            email = request.form['email']
+            password = md5.new(request.form['password']).hexdigest();
+            insert_query = "INSERT INTO users (username, email, password, created_at, updated_at) VALUES (:username,
+            :email, :password, NOW(), NOW())"
+            query_data = { 'username': username, 'email': email, 'password': password }
+            mysql.query_db(insert_query, query_data)
+
+When your user is trying to log in:
+          password = md5.new(request.form['password']).hexdigest()
+          email = request.form['email']
+          user_query = "SELECT * FROM users where users.email = :email AND users.password = :password"
+          query_data = { 'email': email, 'password': password}
+          user = mysql.query_db(user_query, query_data)
+          # do the necessary logic to login if the user exists, otherwise redirect to login page with error message<br>
+
+
+Salted encryption
+
+While md5 is an easy encryption method and safe for small-time projects, it is not secure enough for enterprise-level applications.
+To really secure your data, you need to make the encryption method more random.
+By random, we mean more unpredictable. As we said before, md5 encryption is the same no matter what computer runs the code.
+So to make our encryption more powerful, we will encrypt our data by using what is called a salt.
+A salt is a "unique" key used to generate a unique password. Example:
+
+            salt = '123'; //where the value 123 changes randomly
+            encrypted_password = md5(password . '' . salt);
+
+A salt is a string of random characters that will be passed to an encryption method (an md5()) along with the string we are trying to encrypt (the submitted password) via concatenation.
+The encryption method that uses the salt is designed in such a way that it takes the salt to compute the encrypted string, using the salt as an 'ingredient' in the encryption 'recipe'.
+
+Generating a salt
+
+To generate a salt, you just need to generate a random string of characters. The code below actually uses two different functions to render a random string:
+
+          import os, binascii # include this at the top of your file
+          salt = binascii.b2a_hex(os.urandom(15))
+
+The function called os.urandom() returns a string of bytes. The number of bytes is equal to the parameter provided.This string isn't a normal alphanumeric string, so we turn it into a string using the function b2a_hex(), which will turn the value returned from the openSSL function into a normal alphanumeric string. This new random string will be our salt. The idea is to store this salt during the registration process. Example:
+
+          username = request.form['username']
+          email = request.form['email']
+          password = request.form['password']
+          salt =  binascii.b2a_hex(os.urandom(15))
+          encrypted_pw = md5.new(password + salt).hexdigest()
+          insert_query = "INSERT INTO users (username, email, password, salt, created_at, updated_at)
+               VALUES (:username, :email, :encrypted_pw, :salt, NOW(), NOW())"
+          query_data = { 'username': username, 'email': email, 'encrypted_pw': encrypted_pw, 'salt': salt}
+          mysql.query_db(insert_query, query_data)
+
+Now, when we are trying to authenticate a user's login, we do some pretty nifty stuff:
+
+        email = request.form['email']
+        password = request.form['password']
+        user_query = "SELECT * FROM users WHERE users.email = :email LIMIT 1"
+        query_data = {'email': email}
+        user = mysql.query_db(user_query, query_data)
+        if user[0]:
+         encrypted_password = md5.new(password + user[0]['salt']).hexdigest();
+         if user[0]['password'] == encrypted_password:
+          # this means we have a successful login!
+         else:
+             # invalid password!
+        else:
+          # invalid email!
