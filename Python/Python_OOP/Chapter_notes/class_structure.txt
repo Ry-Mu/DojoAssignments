@@ -1,0 +1,40 @@
+Class Structure
+
+You can easily create a class in Python by typing the keyword class followed by the name of your class and (object).
+
+            class Human(object):
+                pass
+
+You should notice that we define one parameter object. When the parameter for a class is object it simply means that this class inherits from the object class. Don't worry about what this means for now. What you just need to know is that object is a special variable in Python that you should include in the parenthesis when you are creating a new class. Also, we have the keyword pass in the body - it is used to tell Python we want an empty block.
+
+More generally, a class looks like this:
+
+          class ClassName(object):
+            //attributes and methods here
+
+Think of the class as a blueprint for creating something. Once, we've finished our blueprint we can create instances of this class. The Human class we defined above is a blueprint for creating humans. We create a new instance by using the class name as if it were a function. Let's go ahead and make instances of our human class
+
+          michael = Human()
+          jimmy = Human()
+
+
+Debugging a Class Definition
+
+When we get syntax errors on a class definition, it can be in the class line or one of the internal method function definitions.
+
+If we get a simple  SyntaxError on the first line, we have misspelled class, left off an ( or ), or omitted the ":" that begins the suite of statements that defines the class.
+
+If we get a syntax error further in the class definition, then our method functions aren’t defined correctly. Be sure to indent the  def once (so it nests inside the class). Be sure to indent the suite of statements inside the def twice.
+
+Debugging Object Construction
+Assuming we’ve defined a class correctly, there are three things that can go wrong when attempting to construct an object of that class.
+
+The class name is spelled incorrectly.
+You’ve omitted the () after the class name. If we say my_object= MyClass, we’ve assigned the class object, MyClass, to the variable my_object. We have to say my_object= MyClass() to use the class name as a factory and create an instance of a class.
+You’ve got incorrect argument values for the parameters of the __init__().
+
+Debugging Class vs. Object Issues
+
+Perhaps the biggest mistake newbies make is attempting to exercise the method functions of a class instead of a specific object. You can’t easily say  MyClass.my_function(), you’ll get the cryptic TypeError: unbound method error message. The phrase “unbound method” means that no instance was being used.
+
+When you say  x= MyClass(), you are creating an instance. When you see x.my_function(), then you are asking that specific object to do its my_function() operation.

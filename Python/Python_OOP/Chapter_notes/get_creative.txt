@@ -1,0 +1,45 @@
+Get Creative
+
+As we saw in the previous video, OOP can allow us to build the blueprints for the gaming world.
+We will also be creating classes and objects. Think of yourself as an artist, with an easel (text editor) and the ability to bring your paintings to life (running programs in the terminal)! If you could paint it, you can make it a reality.
+As developers, we are artists! As we learn more concepts, we can code and create anything we can think of simply using the terminal and a text editor. From a blank page, we will create our own little universe built by our code.
+Object-oriented programming helps us with this task. You can use it to create living creatures and objects that occupy your world.
+
+Okay, enough of high-level talk. Let's create our world. Our world will consist of humans...but not just normal humans.
+There are three main clans between the humans: Wizard, Ninja, and Samurai (we'll get to them in the next chapter). They are all Humans, but they are from different subclasses. We will just focus on creating instances of Humans in this chapter, and in the next chapter, we will create the subclasses of Humans.
+
+Humans
+
+Note: The following code is the finished implementation of our blueprint for creating instances of Humans. We will build this together throughout the tab so don't worry if you don't understand every line of code.
+
+Let's say we want our world to be lively and we want to create a lot of instances of humans. We can start from scratch and create each Human, but this clearly isn't going to scale. It would be awesome if we could have some sort of factory where we can provide a blueprint for creating a Human. What attributes and actions are common across all instances of Humans?
+
+One thing is for sure, every instance of a Human can be unique. Everyone's unique. Don't worry, having a blueprint doesn't mean that each instance of a Human is not going to be unique. The blueprint will only provide the basic structure that all Humans share...such as a name. This will allow us to provide a unique name for each Human but at the same time, all Humans will have an attribute of name. Don't worry if you don't understand the code yet.
+
+This is the finalized code of the class Human that we are going to write incrementally throughout the following tabs:
+
+          import random
+          class Human(object):
+            def __init__(self, clan=None):
+              print 'New Human!!!'
+              self.health = 100
+              self.clan = clan
+              self.strength = 3
+              self.intelligence = 3
+              self.stealth = 3
+            def taunt(self):
+              print "You want a piece of me?"
+            def attack(self):
+              self.taunt()
+              luck = round(random.random() * 100)
+              if(luck > 50):
+                if((luck * self.stealth) > 150):
+                  print 'attacking!'
+                  return True
+                else:
+                  print 'attack failed'
+                  return False
+              else:
+                self.health -= self.strength
+                print "attack failed"
+                return False

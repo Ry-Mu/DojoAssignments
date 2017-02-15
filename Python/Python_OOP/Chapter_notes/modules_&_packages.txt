@@ -1,0 +1,79 @@
+Modules & Packages
+
+Modules
+
+Modules are simply Python files with the .py extension which implement a set of functions. Modules are imported using the import command.
+
+The first time a module is loaded into a running Python script, it is initialized by executing the code in the module once. If another module in your code imports the same module again, it will not be loaded twice, but only once - so local variables inside the module act as a "singleton" - they are initialized only once.
+
+Now if we want to import the urllib module, which enables us to create read data from URLs, we can simply import the module:
+
+        # import the library
+        import urllib
+        # NOTE: there's a urllib version for each version of Python:
+        # Use urllib2 if you're using Python 2
+        # Use urllib3 for Python 3
+
+        # Finally, use it...
+        urllib.urlopen(...)
+
+Notice how we used urllib as a variable to refer to our module and then we called the functions using dot notation.
+
+Creating Your Own Modules
+
+Writing your own Python modules is very simple. To create a module, we first create a new .py file with the module name in the same directory as the file that will import the module. Then we import it using the import command and the Python file name (without the .py extension)
+
+For example, let's create a module of arithmetic operations:
+
+          #file name: arithmetic.py
+          def add(x, y):
+              return x + y
+          def multiply(x, y):
+              return x * y
+          def subtract(x, y):
+               return x - y
+
+We can import arithmetic module and run the functions by doing this...
+
+        import arithmetic
+        print arithmetic.add(5, 8)
+        print arithmetic.subtract(10, 5)
+        print arithmetic.multiply(12, 6)
+
+Note: just make sure that the module and the file importing the module are in the same folder/directory.
+
+Standard (Built-In) Modules
+
+Python comes with a library of standard modules. Some modules are built into the interpreter; these provide access to operations that are not part of the core of the language but are nevertheless built-in, either for efficiency or to provide access to operating system primitives such as system calls. The set of such modules is a configuration option which also depends on the underlying platform. For example, the winreg module is only provided on Windows systems. One particular module deserves special mention: sys, which is built into every Python interpreter.
+
+List of built-in modules can be found in this link.
+
+Now we can use the built-in random module in our Human class. In order to attack and be successful, our human needs a certain amount of luck. We know that luck is pretty random so we'll use this function to generate a random number in our new function:
+
+import random # import the random module
+class Human(object):
+          def __init__(self, clan=None):
+            print 'New Human!!!'
+            self.health = 100
+            self.clan = clan
+            self.strength = 3
+            self.intelligence = 3
+            self.stealth = 3
+          def taunt(self):
+            print "You want a piece of me?"
+          # inserted a new function so our Human instances can attack
+          def attack(self):
+            self.taunt()
+            # use the random module to generate a number when we attack
+            luck = round(random.random() * 100)
+            if(luck > 50):
+              if(luck * self.stealth > 150):
+                print 'attacking!'
+                return True
+              else:
+                print 'attack failed'
+                return False
+            else:
+              self.health -= self.strength
+              print "attack failed"
+              return False
