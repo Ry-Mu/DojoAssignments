@@ -1,0 +1,87 @@
+Object Oriented Programming (oop)
+
+Objects have properties(attributes) and methods
+
+var arr = [1,2,3,4,5]
+  an array has methods and attributes
+  - .pop()
+  - .push()
+  - .length
+
+When we say we create a class, basically creating a plan for what we want.
+
+class cat
+  -tail (attribute)
+  -whiskers(attribute)
+  -breed(attribute)
+  -color(attribute)
+  -Snize (attribute)
+  -name (attribute)
+
+  All the above are attributes
+
+  meow (method)
+  jump murder (method)
+  cuddle (method)
+  scratch (method)
+  purr (method)
+  poop (method)
+
+  All the above are methods
+
+
+  Kevin is an instance of the cat class
+  Qbert is another language
+
+  Some basic syntax notes in python
+
+  class Cat #common python convention to make all classes as caps. Dont forget the colon!
+
+        class Cat(object):
+          pass
+kevin = cat()  #this is how you create an instance of a class.
+qbert = Cat()  #names of the instances best practice is to do lower classes
+
+kevin.color = "grey"  #too much work to do something like this everytime we make a class.
+qbert.color = "white" #this is why we do classes.
+
+class Cat(object):
+def__init__(self,name, color, breed) #when you are making an instance for the first time, you need to specify these three things)
+  self.name = name  #pulled from whatever details we specified in above paranthesis
+  self.color = color
+  self.breed = breed
+
+
+kevin = cat("kevin", "grey", "stray")
+qbert = cat("qbert", "white", "tiger")
+
+def murder(self, animal):
+print " {{killed a}}" .format(self.name, animal)
+
+kevin.murder("lizard")
+
+
+52 cards example.
+
+You have spades, diamonds, hearts and clubs - these things are called suits.
+These suits have values 1-13 [A-10, face cards]
+shuffling cards - randomizing function
+dealing cards - function for passing out cards
+players hands - hold and discard function
+
+
+class deck
+  - amount
+  -shuffle
+  -deal
+
+class card
+  - suit
+  -value
+  -color
+
+class player
+-name
+hand,
+draw()
+discard()

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Success - Feb demo emails</title>
+  </head>
+    <div class="container"
+
+      <h1>Success</h1>
+        {% for e in emails %}
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="goodemail">{{message}} </p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <p>
+       {{e.email}}, {{e.created_at}}
+      </p>
+
+      {% endfor %}
+    </div>
+  </body>
+</html>
