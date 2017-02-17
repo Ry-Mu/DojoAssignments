@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Results Page</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'surveyform/css/styles.css'%}" />
+  </head>
+  <body>
+    <div>
+      <h1>Thanks for submitting this form! You have submittted this form {{request.session.count}} times now.</h1>
+    </div>
+        <h1>Submitted Information</h1>
+        <p>Name: {{request.session.name }}</p>
+        <p>Location: {{request.session.location }}</p>
+        <p>Favorite Language: {{request.session.language}}</p>
+        <p>Comment: {{request.session.comments }}</p>
+    <div>
+      <form action="/" name ="back">
+      <input type="submit" value="Go Back!"></input>
+      </form>
+  </body>
+</html>
