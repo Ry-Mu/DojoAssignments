@@ -1,0 +1,31 @@
+.container {
+ margin-top: 3%;
+}
+.gold-box {
+ box-shadow: inset 0 0 20px black;
+ height: 50px;
+ padding: 5px;
+ text-align: center;
+}
+
+.gold-box h3{
+   color: gold;
+}
+
+.gold-box{
+  box-shadow: inset 0 0 20px black;
+  height: 55px;
+  padding: 5px;
+  text-align: center;
+}
+.box {
+ box-shadow: inset 0 0 20px black;
+ height: 250px;
+ padding: 10px;
+ border-radius: 10px;
+ text-align: center;
+}
+
+.act-box {
+  text-align: left;
+}
