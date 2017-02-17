@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>All Ninjas!</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'dininjas/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'dininjas/css/skeleton.css' %}">
+    <link rel="stylesheet" href="{% static 'dininjas/css/style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <img src="{% static 'dininjas/images/'%}{{img}}" alt="All Ninjas">
+    </div>
+  </body>
+</html>
