@@ -1,0 +1,18 @@
+Deployment Basics
+In this section we'll cover what deployment is, why it's important, and how to do it!
+
+Why Should I Learn to Deploy?
+In your work as a web developer you will probably not be deploying your own work. The larger a company becomes, the more complicated the deployment process gets. This set of tasks is often automated, meaning a developer or team of developers is tasked with creating and managing internal tools that make deployment simple. This is a job in its own right, know as Dev Ops (development operations). That being said, there are plenty of good reasons to learn to deploy:
+
+Your Portfolio - It is important to have a portfolio containing projects that can be shown to recruiters or interviewers. In order for potential employers to access and interact with your project, it has to be deployed to its own IP address.
+Working Knowledge - Often when we follow up with interviewers, one comment we've received in the past is that students didn't have a solid understanding of deploying web applications. It is a highly desirable skill in case you end up being the only engineer at a young start-up. Also, this knowledge will help you integrate with a team that potentially has a lot of moving pieces.
+The Extra Mile - After you've created all the client and server-side components, actually deploying your app is really the capstone to this process. There is nothing like seeing your site up and running on a domain that you've purchased.
+Where and How do I Deploy?
+There are many services that assist with deployment. If you ever need to deploy a prototype quickly these services might be the best choice. However, today we'll be learning the more challenging and complicated skill of constructing your own server on a remote computer.
+
+In the Cloud
+You may have already heard people talk about deploying apps to the cloud. What this means is setting up your application on a remote machine that can be accessed by browsers sending requests to your server.
+
+There are many web server hosting choices. We will be using Amazon Web Services (AWS). Amazon has servers all over the world consisting of many powerful computers. These computers are connected to the internet, allowing us to rent out a small piece of that server for our use. The piece of a server we are given is very much like the computer you are currently using, but without a screen, keyboard or user interface. In order to access it, we will use a secure shell via the command line to open a window into our remote computer. We will then install everything we need to build and run our app. You'll learn more about that process in the following tabs.
+
+Now that you've had a brief introduction let's get started deploying your Django project!

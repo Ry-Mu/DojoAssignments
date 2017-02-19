@@ -1,0 +1,36 @@
+Django Models
+
+Lets cover a few common concepts about Django Models:
+
+1. How we define the column types
+2. The different types a column can take on
+
+Column Structure
+
+Inside our model class:
+
+          from django.db import models
+          class ModelThing(models.Model):
+          #  column_name = models.Column_Type(optional_params)
+            first_name = models.CharField(max_length=30)
+
+All we did was set the column (named first_name) to be saved as the type of whatever we specified (CharField), and provided an optional parameter (max_length=30).
+
+Column types
+
+You can find a full list of allowed column types in the documentation, but here are some of the main ones you'll be using.
+
+CharField:
+Any text that a user may enter. This has one additional required parameter, max_length, that (unsurprisingly) is the maximum length of text that can be saved.
+
+TextField:
+Like a CharField, but with no maximum length. Your user could copy the entire text of Atlas Shrugged into the field, and it would save in the database correctly.
+
+IntegerField, BooleanField:
+Holds integers or booleans, respectively
+
+DateTimeField:
+Used for date and times, such as timestamps or when a flight is scheduled to depart. This field can take too very useful optional parameters, auto_now_add=True, which adds the current date/time when object is created, and auto_now=True, which automatically updates any time the object is modified.
+
+ForeignKey, ManyToManyField, OneToOneField:
+Used to indicate a relationship between models (anything that would require a JOIN statement in SQL). ForeignKey is for one-to-many relationships and goes in the model on the "many" side, just as the foreign key column goes in the SQL table on the "many" side.

@@ -1,0 +1,66 @@
+Models in the MVC Structure
+
+Models in the MVC architecture are the workhorses of data manipulation. They control which data are released to the controllers. Because of this, the phrase skinny controllers and fat models is often used, and is an important design principle:
+
+Any heavy logic including database queries is the purview of a Model. If a Controller (in Django's case, a View) needs to perform logic or get information from a database, it should use a Model method to do so.
+Here's an analogy: When we call list.reverse() to reverse a list in Python, we don't care what goes on in the background (i.e. the logic of the reverse method), so long as it does what we wanted (reverse the list!).
+
+The same principle can be applied in Django to the Model/View relationship. We want our views (controllers in MVC parlance) to call simple, clearly named methods of our models that can receive and return data in an organized way.
+
+That way, if a colleague wanted to use one of these model methods, they could do so easily. (This isn't an excuse to write ugly, overly verbose, unreadable code in your models, but a call to move much of the data logic to the model and have predictable return values).
+
+In Flask we created our database using mysql-workbench and validated user inputs based on the route we hit.
+
+For example, maybe when we went to /register, our app checked all of the request.form elements to see if they were valid to register a user.
+
+Across web frameworks such as the MEAN stack, Rails, and Django, the models file does two things:
+
+Gives information about what's inside the relevant SQL table
+Provides a location for the sort of validations we just talked about
+
+video notes
+
+models in an mvc arch is that the controller makes call that are clear, two different models, and the controller
+
+controller thin, model fat.
+
+thick models, thin controllers.
+
+django will build the table for us! and allow us to access that table.
+
+
+
+Now think back to your Flask days. Creating an ERD diagram didn't actually create the database table(s). We had to forward engineer the diagram into SQL code, and then run that SQL code in a MySQL environment. There's an analogous process in Django:
+
+To do the equivalent of forward engineer we are going to run a couple of commands from the terminal.
+
+            > python manage.py makemigrations
+            > python manage.py migrate
+
+Remember:
+
+Never delete migration files, and always makemigrations and migrate anytime you change something in your models.py files – that's what updates the actual database so it reflects what's in your models.
+The first command ( makemigrations) tells Django:
+
+        Look and see if there have been any changes to the models files in our apps. If so, create the code (using built-in Django methods) that represents those changes.
+
+The second command ( migrate) says:
+
+        Forward engineer those changes into our database! (I.e. turn the code generated inside a migration file into SQL commands and run those commands in local memory)
+
+For development, we are going to be using SQLite - a prepackaged SQL database that has much of the functionality of MySQL (but not all of it) and is stored as local memory.
+
+For deployment you'll have the option to use SQLite, but we'll also show you how to add a MySQL database, which you've already used with Flask.
+
+Now we've seen how to build a model and migrate in order to translate our code to SQL. See below for the queries shown in the video.
+
+
+            #in views.py
+            from django.shortcuts import render
+            #look inside models.py for people class
+            from .models import People
+            def index(request):
+            People.objects.create(first_name=“Mike”,last_name=“Hannon”)
+            people = People.objects.all()
+            print people
+            return render(request,”third_app/index.html”)

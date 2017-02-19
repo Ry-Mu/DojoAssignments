@@ -1,0 +1,43 @@
+Django Models as ERD's'
+
+Creating Django models can be confusing because so much is done for us without visual aids like the ERDs in MySQL Workbench. To help ease us into the comfort of the using migrations to generate the Django Models, let's look at how we would approach a few different databases, and what the ERD would look like.
+
+(few pictures shown on learning platform)
+
+We might have a name column that is a CharField, a description that is a TextField, and created_at and updated_at fields that are DateField's:
+(few pictures shown on learning platform)
+Now how would we transfer this into a Django Model? We might write something like the following:
+
+            # Inside models.py
+            from django.db import models
+            class Course(models.Model):
+               name = models.CharField(max_length=255)
+               description = models.TextField() #remember text fields can hold unlimited space unless optionally specified not to do so.
+               created_at = models.DateTimeField(auto_now_add=True) #auto_now_add adds the current date/time when object is created.
+               updated_at = models.DateTimeField(auto_now=True) #auto_now updates the current date.time once an object is updated.
+
+Pretty straightforward. To reiterate: We created a name column and a description column, one with the Column_Type as a CharField and the other as a TextField. But notice how there isn't an ID column... This gets created by Django on our behalf.
+
+Let's build the equivalent of the following ERD diagram in Django:
+(few pictures shown on learning platform)
+
+Notice the many_to_one relationship; one user can be associated with many posts. Here's the equivalent Django code:
+              # Inside models.py
+              from __future__ import unicode_literals
+              from django.db import models
+              # Create your models here.
+              class User(models.Model):
+                  first_name = models.CharField(max_length=45)
+                  last_name = models.CharField(max_length=45)
+                  password = models.CharField(max_length=100)
+                  created_at = models.DateTimeField(auto_now_add = True)
+                  updated_at = models.DateTimeField(auto_now = True)
+              class Post(models.Model):
+                  title = models.CharField(max_length=45)
+                  message = models.TextField(max_length=1000)
+                  # Notice the association made with ForeignKey for a one-to-many relationship
+                  user_id = models.ForeignKey(User)
+                  created_at = models.DateTimeField(auto_now_add = True)
+                  updated_at = models.DateTimeField(auto_now = True)
+
+ßThat ForeignKey statement is the equivalent of the one-to-many relationship shown in the ERD diagram.

@@ -1,0 +1,93 @@
+As discussed in the Big Picture section, once an HTTP request is made, the routing file ( urls.py) decides which controller/method runs.
+
+Instead of just printing text from inside apps/first_app/urls.py, let’s change the contents to something similar to the code that lives in main/urls.py:
+
+apps/first_app/urls.py
+
+            from django.conf.urls import url
+            def method_to_run(request):
+             print "Whatever route that was hit by an HTTP request (by the way) decided to invoke me!"
+             print "By the way, here's the request object that Django automatically passes us:", request
+             print "By the by, we still aren't delivering anything to the browser, so you should see 'ValueError at /'"
+            urlpatterns = [
+             url(r'^$', method_to_run)
+            ]
+
+Technically, the above code isn’t a method, because it is not attached to an object. But we want it to be attached, and we also want it to live in another file. Recall that we previously learned that we can use import to bring in the contents of other source files.
+
+Here’s an example of the first_app/urls.py file that is now modularized. By this, we mean that the function/method we invoke from routes no longer lives in urls.py.
+
+apps/first_app/urls.py
+
+              from django.conf.urls import url
+              def method_to_run(request):
+              print "Whatever route that was hit by an HTTP request (by the way) decided to invoke me!"
+              print "By the way, here's the request object that Django automatically passes us:", request
+              print "By the by, we still aren't delivering anything to the browser, so you should see 'ValueError at /'"
+              urlpatterns = [
+              url(r'^$', method_to_run)
+              ]
+
+Technically, the above code isn’t a method, because it is not attached to an object. But we want it to be attached, and we also want it to live in another file. Recall that we previously learned that we can use import to bring in the contents of other source files.
+
+Here’s an example of the first_app/urls.py file that is now modularized. By this, we mean that the function/method we invoke from routes no longer lives in urls.py.
+
+apps/first_app/urls.py
+
+              from django.conf.urls import url
+                from . import views           # This line is new!
+                urlpatterns = [
+                  url(r'^$', views.index)     # This line has changed!
+                ]
+
+  Let’s break our urls.py file down:
+
+  from django.conf.urls import url - This gives us access to the variable url (which points to a function)
+
+  from . import views - This gives us access to everything in a views.py file that Django automatically created for us when we built our first_app
+
+  url(r'^$', views.index)
+    - Uses the url method in a way that’s very similar to the @app.route method in flask. The r after the ( identifies the following string to match as a regular expression pattern.
+    -In this case, it will exactly match an empty string. That means if you were to go to localhost:8000/, Django (after removing the '/' automatically) will check if anything matches.
+    -In this case, it does! An empty string is what r'^$' looks for. Since the pattern matches, we run the views.index method.
+
+  url() - will eventually take another parameter, something like name='index', which we’ll introduce when we talk about named routes.
+  Note that, unlike a flask route where there is an HTTP method (e.g. “GET” and/or “POST”), Django doesn’t care. We (the developer) figure that out in the method by accessing request.method in our function.
+
+  Let’s build an index method inside apps/first_app/views.py:
+
+  apps/first_app/views.py
+
+
+              from django.shortcuts import render, HttpResponse
+              # Create your views here.
+              def index(request):
+                response = "Hello, I am your first request!"
+                return HttpResponse(response)
+
+While Django automatically creates the request object for us that's passed into our method, HttpResponse objects are our responsibility to create and return to the browser. Note that 'render' is a shortcut method that combines a given template with a given context dictionary and returns an HttpResponse object with that rendered text. We are not using render because we haven't created any templates yet!
+
+MVC Overview
+
+Our URL pattern should now look like this:
+
+          urlpatterns = [
+              url(r'^$', views.index)
+          ]
+Let's head over to our views.py file now and create that index method.
+
+          def index(request):
+            print "*"*50
+            return render(request, 'first_app/index.html')
+
+
+Currently, we don't have an index.html file. We want this file to be nested in a folder that shares its name with the app. This will help keep things organized and make getting to the index.html file an explicit procedure.
+
+apps
+  first_app
+    ->templates
+      ->first_app
+        ->index.html
+
+
+Edit the index.html file so that it displays a "Hello World" message.
