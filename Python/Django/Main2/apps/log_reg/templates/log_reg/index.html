@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login Registration</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'login_reg/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'login_reg/css/skeleton.css' %}">
+        <link rel="stylesheet" href="{% static 'login_reg/css/styles.css' %}">
+    </head>
+    <body>
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li class="{{ messages.tags }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+            <form class="register container" action="/register" method="POST">
+              <!-- {% crsf_token %} -->
+
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name">
+
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="last_name">
+
+                <label for="email">Email</label>
+                <input type="text" name="email" id="password">
+
+                <label for="password_confirm">Confirm Password</label>
+                <input type="password" name="password_confirm" id="password_confirm">
+
+                <input type="submit" name="submit" value="Register">
+
+            </form>
+            <form class="login container" action="/login" method="POST">
+
+                <label for="log-email">Email</label>
+                <input type="text" name="log-email" id="log-email">
+
+                <label for="log-password">Password</label>
+                <input type="password" name="log-password" id="log-password">
+
+                <input type="submit" name="submit" value="Login">
+
+            </form>
+    </body>
+</html>

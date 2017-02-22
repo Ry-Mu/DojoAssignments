@@ -1,0 +1,62 @@
+ForeignKey Relationships
+
+To show a one-to-many relationship between models, Django uses a special field, ForeignKey. Consider these models:
+
+            class Author(models.Model):
+              name = models.CharField(max_length=255)
+              created_at = models.DateTimeField(auto_now_add=True)
+              updated_at = models.DateTimeField(auto_now=True)
+            class Book(models.Model):
+              title = models.CharField(max_length=255)
+              author = models.ForeignKey(Author, related_name="books")
+              created_at = models.DateTimeField(auto_now_add=True)
+              updated_at = models.DateTimeField(auto_now=True)
+
+
+Notice that the Book model has this line: models.ForeignKey(Author, related_name="books"). This establishes a one-to-many relationship, that one author can have many books, and that information about a book's author can be accessed as some_book.author. To create a record that has this foreign key relationship, you'd pass it into the create function, like with any other field:
+
+          this_author = Author.objects.get(id=2)
+          my_book = Book.objects.create(title="Little Women", author=this_author)
+          # or on one line...
+          my_book = Book.objects.create(title="Little Women", author=Author.objects.get(id=2))
+
+Joins in Django happen automatically. If you have a book object, you don't need to run any additional query to get information about the author. my_book.author.name will give "Louisa May Alcott", this this case.
+
+You can search based off of a ForeignKey relationship. This code will find all of the books by the author with ID 2:
+
+        this_author = Author.objects.get(id=2)
+        books = Book.objects.filter(author=this_author)
+        # one-line version:
+        books = Book.objects.filter(author=Author.objects.get(id=2))
+
+You can also search by a field in the related object by using a double underscore:
+
+      books = Book.objects.filter(author__name="Louise May Alcott")
+      books = Book.objects.filter(author__name__startswith="Lou")
+
+
+Reverse Look-ups
+
+You may have noticed that we haven't mentioned the related_name field yet. This is used for a reverse look-up. In addition to placing a field on our book that holds the author information, Django has also placed a field on the author that holds information about all of their books. Just refer to some_author.books.all()! (You need to say .all because there could potentially be many books connected to this author, not just one.) This can be especially convenient on a template
+
+book_project/apps/books/views.py
+
+          def index(request):
+            context = {"authors": Author.objects.all()}
+            return render(request, "books/index.html", context)
+
+book_project/apps/books/templates/books/index.html
+        <h1>Author List</h1>
+        <ul>
+          {% for author in authors %}
+            <li>{{author.name}}</li>
+              <ul>
+                {% for book in author.books.all %}
+                  <li><em>{{book.title}}</em></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+
+(reference picture in notes for final output)
