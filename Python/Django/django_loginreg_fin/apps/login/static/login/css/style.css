@@ -1,0 +1,42 @@
+div {
+  display: block;
+}
+
+td {
+  text-align: right;
+}
+
+td:nth-child(1) {
+  width: 100px;
+}
+
+td:nth-child(3) {
+  color: red;
+}
+
+input {
+  color: #DDDDDD;
+}
+
+ul {
+  color: red;
+}
+
+.button {
+  background-color: navy;
+  color: white;
+}
+
+html {
+    background: linear-gradient(to top left, white, lightblue, lightblue);
+    background-repeat: no-repeat;
+    height: 1000px;
+}
+
+h2 {
+  color: red;
+}
+
+h1 {
+  color: red;
+}
