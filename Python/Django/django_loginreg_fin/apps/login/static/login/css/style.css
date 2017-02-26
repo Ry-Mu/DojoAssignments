@@ -40,3 +40,10 @@ h2 {
 h1 {
   color: red;
 }
+
+.container {
+  background-color: silver;
+}
+#silver-cont{
+  background-color: silver;
+}

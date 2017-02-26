@@ -1,0 +1,27 @@
+Bcrypt, Django Style!
+
+In your Django virtualenv:
+
+      (djangoEnv)>pip install bcrypt
+
+In some operating systems, bcrypt requires a few extra dependencies. Stack overflow provides some solid solutions, but if you can’t find one that works for your system AND can’t get bcrypt properly installed and have exercised the 20 minutes rule, you know what to do!
+
+Bcrypt documentation explains how to generate an initial hashed password (shown below) as well as how to get a compare passwords!  In essence, Bcrypt can retrieve a salt from a Bcrypt encrypted string.    Amazingly, the line before the exit in the snippet below prints out the same thing as hashed...  I bet we can do some sort of comparison to see if a random password you pass in is equivalent.
+
+After you have pip installed, in your Terminal/Bash Shell (wherever your virtualenv is running) try the following:
+
+
+            (djangoenv)>python
+            >>> import bcrypt
+            >>> password = "super secret password"
+            >>> hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+            >>> print hashed
+            >>> print len(hashed)
+            >>> hashed2 = bcrypt.hashpw(password, bcrypt.gensalt())
+            >>> print hashed2
+            >>> print bcrypt.hashpw(password,hashed)
+            >>> exit()
+
+Should you run into an encoding error when you’re hashing passwords with bcrypt, the following method might be useful:
+
+            +your_string.encode()
